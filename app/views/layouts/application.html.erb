@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title><%= content_for(:title) || "Booking Gigs" %></title>
+    <title><%= content_for(:title) || "Booking Gigs: Discover, Post, and Book Your Next Big Gig!" %></title>
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <%= csrf_meta_tags %>
@@ -11,15 +11,16 @@
 
     <link rel="manifest" href="/manifest.json">
     <link rel="icon" href="/icon.png" type="image/png">
-    <link rel="icon" href="/icon.svg" type="image/svg+xml">
     <link rel="apple-touch-icon" href="/icon.png">
     <%= stylesheet_link_tag "tailwind", "inter-font", "data-turbo-track": "reload" %>
     <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
     <%= javascript_importmap_tags %>
   </head>
 
+  <%= render "layouts/navbar" %>
+
   <body>
-    <main class="container mx-auto mt-28 px-5 flex">
+    <main class="container mx-auto px-5 flex justify-center">
       <%= yield %>
     </main>
   </body>
