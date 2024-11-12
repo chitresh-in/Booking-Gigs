@@ -1,0 +1,32 @@
+<div id="<%= dom_id event %>">
+  <p class="my-5">
+    <strong class="block font-medium mb-1">Name:</strong>
+    <%= image_tag event.poster_image, class: "w-full" %>
+  </p>
+
+  <p class="my-5">
+    <strong class="block font-medium mb-1">Description:</strong>
+    <%= event.description %>
+  </p>
+
+  <p class="my-5">
+    <strong class="block font-medium mb-1">Venue:</strong>
+    <%= event.venue_id %>
+  </p>
+
+  <p class="my-5">
+    <strong class="block font-medium mb-1">Total tickets:</strong>
+    <%= event.total_tickets %>
+  </p>
+
+  <p class="my-5">
+    <strong class="block font-medium mb-1">Max tickets per user:</strong>
+    <%= event.max_tickets_per_user %>
+  </p>
+
+  <p class="my-5">
+    <strong class="block font-medium mb-1">Start time:</strong>
+    <%= event.start_time %>
+  </p>
+
+</div>

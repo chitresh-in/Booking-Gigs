@@ -1,0 +1,17 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  name: MyString
+  description: MyText
+  venue: one
+  total_tickets: 1
+  max_tickets_per_user: 1
+  start_time: 2024-11-09 18:58:13
+
+two:
+  name: MyString
+  description: MyText
+  venue: two
+  total_tickets: 1
+  max_tickets_per_user: 1
+  start_time: 2024-11-09 18:58:13

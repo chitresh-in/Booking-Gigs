@@ -1,0 +1,72 @@
+<%= form_with(model: event, class: "contents") do |form| %>
+  <% if event.errors.any? %>
+    <div id="error_explanation" class="bg-red-50 text-red-500 px-3 py-2 font-medium rounded-lg mt-3">
+      <h2><%= pluralize(event.errors.count, "error") %> prohibited this event from being saved:</h2>
+
+      <ul>
+        <% event.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="my-5">
+    <%= form.label :title %>
+    <%= form.text_field :title, class: "block shadow rounded-md border border-gray-400 outline-none px-3 py-2 mt-2 w-full", required: true %>
+  </div>
+
+  <div class="my-5">
+    <%= form.label :description %>
+    <%= form.text_area :description, rows: 4, class: "block shadow rounded-md border border-gray-400 outline-none px-3 py-2 mt-2 w-full", required: true %>
+  </div>
+
+  <div class="my-5">
+    <%= form.label :category_id %>
+    <%= form.select :category_id, Category.all.map { |category| [category.name, category.id] }, {}, class: "block shadow rounded-md border border-gray-400 outline-none px-3 py-2 mt-2 w-full" %>
+  </div>
+
+  <div class="my-5">
+    <%= form.label :poster_image %>
+    <%= form.file_field :poster_image, class: "block shadow rounded-md border border-gray-400 outline-none px-3 py-2 mt-2 w-full", required: true %>
+  </div>
+
+  <div class="my-5">
+    <%= form.label :venue_id %>
+    <%= form.select :venue_id, Venue.all.map { |venue| [venue.name, venue.id] }, {}, class: "block shadow rounded-md border border-gray-400 outline-none px-3 py-2 mt-2 w-full" %>
+  </div>
+
+  <div class="my-5">
+    <%= form.label :total_tickets %>
+    <%= form.number_field :total_tickets, class: "block shadow rounded-md border border-gray-400 outline-none px-3 py-2 mt-2 w-full" %>
+  </div>
+
+  <div class="my-5">
+    <%= form.label :max_tickets_per_user %>
+    <%= form.number_field :max_tickets_per_user, class: "block shadow rounded-md border border-gray-400 outline-none px-3 py-2 mt-2 w-full" %>
+  </div>
+
+  <div class="my-5">
+    <%= form.label :booking_start_time %>
+    <%= form.datetime_field :booking_start_time, class: "block shadow rounded-md border border-gray-400 outline-none px-3 py-2 mt-2 w-full", required: true %>
+  </div>
+
+  <div class="my-5">
+    <%= form.label :booking_end_time %>
+    <%= form.datetime_field :booking_end_time, class: "block shadow rounded-md border border-gray-400 outline-none px-3 py-2 mt-2 w-full", required: true%>
+  </div>
+
+  <div class="my-5">
+    <%= form.label :start_time %>
+    <%= form.datetime_field :start_time, class: "block shadow rounded-md border border-gray-400 outline-none px-3 py-2 mt-2 w-full", required: true%>
+  </div>
+
+  <div class="my-5">
+    <%= form.label :end_time %>
+    <%= form.datetime_field :end_time, class: "block shadow rounded-md border border-gray-400 outline-none px-3 py-2 mt-2 w-full", required: true%>
+  </div>
+
+  <div class="inline">
+  <%= form.submit class: "rounded-lg py-3 px-5 bg-blue-600 text-white inline-block font-medium cursor-pointer" %>
+</div>
+<% end %>
