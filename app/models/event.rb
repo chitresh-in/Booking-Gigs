@@ -10,12 +10,13 @@ class Event < ApplicationRecord
   belongs_to :host, class_name: "User"
 
   has_one_attached :poster_image
+  has_rich_text :rich_description
 
   has_many :tickets, dependent: :destroy
   has_many :bookings, dependent: :restrict_with_exception
   has_many :users, through: :bookings
   
-  validates :title, :description, :start_time, :end_time, :booking_start_time, :booking_end_time, 
+  validates :title, :start_time, :end_time, :booking_start_time, :booking_end_time, 
     :category, :venue, presence: true
   validates :poster_image, attached: true
 

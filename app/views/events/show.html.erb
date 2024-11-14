@@ -5,6 +5,7 @@
     <% end %>
 
     <%= render @event %>
+    <div class="mt-8"><%= @event.rich_description %></div>
 
     <% if @event.booking_open? %>
       <% if user_signed_in? %>
