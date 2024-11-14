@@ -1,15 +1,14 @@
 class EventsController < ApplicationController
   before_action :set_event, only: %i[ show edit update]
-  before_action :authenticate_user!, if: %i[ new edit update]
+  before_action :authenticate_user!, only: %i[ new edit update]
 
   # GET /events or /events.json
   def index
-    @events = Event.all
+    @events = Event.all.includes(:host, :venue, :category)
   end
 
   # GET /events/1 or /events/1.json
-  def show
-  end
+  def show; end
 
   # GET /events/new
   def new
