@@ -18,7 +18,7 @@ class Event < ApplicationRecord
   
   validates :title, :start_time, :end_time, :booking_start_time, :booking_end_time, 
     :category, :venue, presence: true
-  validates :poster_image, attached: true
+  validates :poster_image, attached: true, if: -> { published? }
 
   validate :booking_start_time_must_be_future
   validate :booking_end_time_must_be_after_booking_start_time
