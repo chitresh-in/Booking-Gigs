@@ -3,6 +3,7 @@ class Event < ApplicationRecord
   acts_as_paranoid
 
   enum :status, { draft: 0, published: 1, cancelled: 2}
+  # TODO: Add AASM to handle status transitions and guards
 
   belongs_to :category
   belongs_to :venue
@@ -10,19 +11,19 @@ class Event < ApplicationRecord
 
   has_one_attached :poster_image
 
-  # has_many :attendees, class_name: "User", through: :bookings
-  # has_many :bookings, dependent: :destroy
   has_many :tickets, dependent: :destroy
-
+  has_many :bookings, dependent: :restrict_with_exception
+  has_many :users, through: :bookings
+  
   validates :title, :description, :start_time, :end_time, :booking_start_time, :booking_end_time, 
     :category, :venue, presence: true
   validates :poster_image, attached: true
-
 
   validate :booking_start_time_must_be_future
   validate :booking_end_time_must_be_after_booking_start_time
   validate :event_start_time_must_be_after_booking_end_time
   validate :event_end_time_must_be_after_event_start_time
+  # TODO: Add validation to ensure no changes are made to published events
 
   after_create :create_tickets, if: -> { saved_change_to_status?(from: "draft", to: "published") }
 
@@ -65,6 +66,6 @@ class Event < ApplicationRecord
   end
 
   def create_tickets
-    Ticket.create!([{event_id: id}] * total_tickets)
+    Ticket.create!([{event_id: id}] * total_tickets) unless has_unlimited_tickets?
   end
 end

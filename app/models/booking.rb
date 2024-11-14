@@ -1,6 +1,6 @@
 class Booking < ApplicationRecord
   has_paper_trail
-  
+  acts_as_paranoid
   enum :status, { pending: 0, confirmed: 1, failed: 2, cancelled: 3 }
   # TODO: Add AASM to handle status transitions and guards
 
