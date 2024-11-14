@@ -3,7 +3,7 @@ class BookingsController < ApplicationController
   before_action :set_booking, only: %i[show cancel]
   before_action :set_event, only: %i[create]
   def index
-    @bookings = current_user.bookings
+    @bookings = current_user.bookings.order(created_at: :desc)
   end
 
   def show
