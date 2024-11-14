@@ -1,4 +1,6 @@
 class Event < ApplicationRecord
+  include Event::SearchConcern
+  
   has_paper_trail
   acts_as_paranoid
 
