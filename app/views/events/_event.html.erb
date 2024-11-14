@@ -1,32 +1,37 @@
-<div id="<%= dom_id event %>">
-  <p class="my-5">
-    <strong class="block font-medium mb-1">Name:</strong>
-    <%= image_tag event.poster_image, class: "w-full" %>
-  </p>
+<div class="group relative">
+  <div class="aspect-h-1 aspect-w-1 w-full overflow-hidden rounded-md bg-gray-200 lg:aspect-none group-hover:opacity-75 lg:h-80">
+    <%= image_tag event.poster_image, class: "h-full w-full object-cover object-center lg:h-full lg:w-full" %>
+  </div>
+  <div class="mt-4">
+    <h3 class="font-semibold text-gray-900">
+      <%= link_to event_path(event), class: "hover:underline" do %>
+        <span aria-hidden="true" class="absolute inset-0"></span>
+        <%= event.title.titleize %>
+      <% end %>
+    </h3>
+    <div class="flex flex-row mt-1">
+      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1" stroke="grey" style="width: 16px;">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M6.75 3v2.25M17.25 3v2.25M3 18.75V7.5a2.25 2.25 0 0 1 2.25-2.25h13.5A2.25 2.25 0 0 1 21 7.5v11.25m-18 0A2.25 2.25 0 0 0 5.25 21h13.5A2.25 2.25 0 0 0 21 18.75m-18 0v-7.5A2.25 2.25 0 0 1 5.25 9h13.5A2.25 2.25 0 0 1 21 11.25v7.5" />
+      </svg>
+      <p class="text-sm text-gray-500 ml-2"><%= event.start_time.strftime("%a, %b %d - %I:%M %p %Z") %></p>  
+    </div>
 
-  <p class="my-5">
-    <strong class="block font-medium mb-1">Description:</strong>
-    <%= event.description %>
-  </p>
+    <div class="flex flex-row mt-1">
+      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1" stroke="grey" style="width: 16px;">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M15 10.5a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
+        <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1 1 15 0Z" />
+      </svg>
+      <p class="text-sm text-gray-500 ml-2"><%= event.venue.name %></p>
+    </div>
 
-  <p class="my-5">
-    <strong class="block font-medium mb-1">Venue:</strong>
-    <%= event.venue_id %>
-  </p>
-
-  <p class="my-5">
-    <strong class="block font-medium mb-1">Total tickets:</strong>
-    <%= event.total_tickets %>
-  </p>
-
-  <p class="my-5">
-    <strong class="block font-medium mb-1">Max tickets per user:</strong>
-    <%= event.max_tickets_per_user %>
-  </p>
-
-  <p class="my-5">
-    <strong class="block font-medium mb-1">Start time:</strong>
-    <%= event.start_time %>
-  </p>
-
+    <div class="mt-1">
+      <% if event.booking_ended? %>
+        <p class="text-sm text-gray-500 text-red-500">Bookings Closed</p>
+      <% elsif event.booking_open? %>
+        <p class="text-sm text-gray-500 text-green-500">Bookings Open</p>
+      <% else %>
+        <p class="text-sm text-gray-500">Booking starts soon</p>
+      <% end %>
+    </div>
+  </div>
 </div>

@@ -1,4 +1,4 @@
-<div class="mx-auto md:w-2/3 w-full flex">
+<div class="mt-8 md:w-2/3 w-full flex">
   <div class="mx-auto">
     <% if notice.present? %>
       <p class="py-2 px-3 bg-green-50 mb-5 text-green-500 font-medium rounded-lg inline-block" id="notice"><%= notice %></p>
@@ -6,9 +6,23 @@
 
     <%= render @event %>
 
-    <% if @event.host == current_user %>
-      <%= link_to "Edit this event", edit_event_path(@event), class: "mt-2 rounded-lg py-3 px-5 bg-gray-100 inline-block font-medium" %>
+    <% if @event.booking_open? %>
+      <% if user_signed_in? %>
+        <%= form_for(Booking.new, html: { class: "space-y-6" }) do |f| %>
+          <div>
+            <label for="tickets_count" class="block text-sm/6 font-medium text-gray-900">Number of tickets</label>
+            <div class="mt-2">
+              <%= f.number_field :tickets_count, required: true, min: 1, max: @event.max_tickets_per_user, class: "block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm/6" %>
+            </div>
+          </div>
+          <%= f.hidden_field :event_id, value: @event.id %>
+          <%= f.submit "Book tickets", class: "flex w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm/6 font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600" %>
+        <% end %>
+      <% else %>
+        <p class="text-center text-sm/6 text-gray-500">
+          <%= link_to "Please sign in to book tickets.", new_user_session_path %>
+        </p>
+      <% end %>
     <% end %>
-    <%= link_to "Back to events", events_path, class: "ml-2 rounded-lg py-3 px-5 bg-gray-100 inline-block font-medium" %>
   </div>
 </div>
