@@ -19,6 +19,11 @@ class BookingsController < ApplicationController
 
   # TODO: Implement cancel action
   def cancel
+    tickets_cancellation_service = Tickets::CancellationService.new(@booking)
+    result = tickets_cancellation_service.cancel
+    return redirect_to booking_path(@booking) if result[:success]
+
+    redirect_to booking_path(@booking), alert: result[:error]
   end
 
   private

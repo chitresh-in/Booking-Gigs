@@ -16,6 +16,10 @@ class Booking < ApplicationRecord
   validate :ensure_no_other_pending_bookings
   validate :ensure_user_ticket_limit
   
+  def cancellable?
+    confirmed? && event.booking_end_time > Time.current
+  end
+
   private 
 
   def ensure_booking_within_open_window

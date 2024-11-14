@@ -9,7 +9,11 @@ Rails.application.routes.draw do
 
   resources :events
   resources :categories
-  resources :bookings
+  resources :bookings, only: %i[index create show] do
+    member do
+      post :cancel
+    end
+  end
 
   resources :hosts, only: [] do
     member do
