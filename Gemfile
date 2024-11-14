@@ -41,6 +41,8 @@ gem 'active_storage_validations', '~> 1.2'
 gem 'paper_trail', '~> 16.0'
 gem 'paranoia', '~> 3.0'
 gem "sidekiq", "~> 7.3"
+gem "searchkick"
+gem  "elasticsearch", "< 7.14"
 
 group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
