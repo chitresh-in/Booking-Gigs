@@ -20,7 +20,8 @@
   <%= render "layouts/navbar" %>
 
   <body>
-    <main class="container mx-auto px-5 flex justify-center">
+    <main class="container mx-auto px-5 flex flex-col justify-center items-center">
+      <%= render "layouts/alerts" %>
       <%= yield %>
     </main>
   </body>
