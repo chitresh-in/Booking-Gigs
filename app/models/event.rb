@@ -28,6 +28,15 @@ class Event < ApplicationRecord
 
   after_create :create_tickets, if: -> { saved_change_to_status?(from: "draft", to: "published") }
 
+  scope :order_by_booking_status, -> { 
+    order(Arel.sql("CASE 
+                      WHEN booking_start_time <= '#{Time.current}' AND booking_end_time >= '#{Time.current}' THEN 0 
+                      ELSE 1 
+                    END, 
+                    booking_start_time, 
+                    start_time")) 
+  }
+
   def has_unlimited_tickets?
     total_tickets.nil?
   end

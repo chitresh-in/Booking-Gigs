@@ -4,7 +4,10 @@ class EventsController < ApplicationController
 
   # GET /events or /events.json
   def index
-    @events = Event.published.includes(:host, :venue, :category)
+    @events = Event.includes(:host, :venue, :category)
+                   .published
+                   .order_by_booking_status
+    # TODO: Add pagination
   end
 
   # GET /events/1 or /events/1.json
