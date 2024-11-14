@@ -4,6 +4,12 @@
     <div class="mt-8"><%= @event.rich_description %></div>
 
     <% if @event.booking_open? %>
+      <p class="mt-4 text-sm text-orange-400">
+        Booking closes on <%= @event.booking_end_time.strftime("%b %d - %H:%M %Z") %>
+      </p>
+      <p class="mt-2 text-sm text-orange-400">
+        Max. tickets per user: <%= pluralize(@event.max_tickets_per_user, "ticket") %>
+      </p>
       <% if user_signed_in? %>
         <%= form_for(Booking.new, html: { class: "space-y-6" }) do |f| %>
           <div>
@@ -16,7 +22,7 @@
           <%= f.submit "Book tickets", class: "flex w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm/6 font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600" %>
         <% end %>
       <% else %>
-        <p class="text-center text-sm/6 text-gray-500">
+        <p class="text-sm/6 text-red-500">
           <%= link_to "Please sign in to book tickets.", new_user_session_path %>
         </p>
       <% end %>
