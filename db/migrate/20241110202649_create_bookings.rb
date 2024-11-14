@@ -8,6 +8,7 @@ class CreateBookings < ActiveRecord::Migration[7.2]
       t.datetime :confirmed_at
 
       t.timestamps
+      t.datetime :deleted_at
     end
   end
 end

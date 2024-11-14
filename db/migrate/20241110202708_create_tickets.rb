@@ -7,6 +7,7 @@ class CreateTickets < ActiveRecord::Migration[7.2]
       t.datetime :alloted_at
 
       t.timestamps
+      t.datetime :deleted_at
     end
   end
 end
