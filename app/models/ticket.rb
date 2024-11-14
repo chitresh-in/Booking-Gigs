@@ -3,7 +3,7 @@ class Ticket < ApplicationRecord
   acts_as_paranoid
 
   belongs_to :event
-  belongs_to :booking
+  belongs_to :booking, optional: true
 
   scope :available_for_booking, -> { where(saleable: true, booking_id: nil) }
 end

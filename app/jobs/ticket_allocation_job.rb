@@ -14,11 +14,12 @@ class TicketAllocationJob
         .lock("FOR UPDATE SKIP LOCKED")
         .limit(booking.tickets_count)
 
-      if available_tickets.count < tickets_count
+      if available_tickets.count < booking.tickets_count
         raise ActiveRecord::Rollback
       end
 
       available_tickets.update_all(booking_id: booking.id)
+      booking.update(status: :confirmed, confirmed_at: Time.current)
     end
   end
 end
