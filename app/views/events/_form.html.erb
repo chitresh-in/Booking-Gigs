@@ -23,7 +23,7 @@
 
   <div class="my-5">
     <%= form.label :category_id %>
-    <%= form.select :category_id, Category.all.map { |category| [category.name, category.id] }, {}, class: "block shadow rounded-md border border-gray-400 outline-none px-3 py-2 mt-2 w-full" %>
+    <%= form.select :category_id, Category.options_for_select, {}, class: "block shadow rounded-md border border-gray-400 outline-none px-3 py-2 mt-2 w-full" %>
   </div>
 
   <div class="my-5">
@@ -33,7 +33,7 @@
 
   <div class="my-5">
     <%= form.label :venue_id %>
-    <%= form.select :venue_id, Venue.all.map { |venue| [venue.name, venue.id] }, {}, class: "block shadow rounded-md border border-gray-400 outline-none px-3 py-2 mt-2 w-full" %>
+    <%= form.select :venue_id, Venue.options_for_select, {}, class: "block shadow rounded-md border border-gray-400 outline-none px-3 py-2 mt-2 w-full" %>
   </div>
 
   <div class="my-5">
