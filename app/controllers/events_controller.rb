@@ -3,10 +3,13 @@ class EventsController < ApplicationController
   before_action :authenticate_user!, only: %i[ new edit update]
 
   # GET /events or /events.json
-  def index
-    @events = Event.includes(:host, :venue, :category)
-                   .published
-                   .order_by_booking_status
+  def index    
+    if params[:search].present?
+      @events = Event.search(params[:search])
+    else
+      @events = Event.published.order_by_booking_status
+    end
+    @events = @events.includes(:host, :venue, :category, [poster_image_attachment: :blob])
     # TODO: Add pagination
   end
 

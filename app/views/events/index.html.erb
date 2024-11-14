@@ -1,6 +1,17 @@
 <div class="mx-auto max-w-2xl px-4 py-16 sm:px-6 sm:py-24 lg:max-w-7xl lg:px-8">
+  <div class="flex justify-between">
   <h2 class="text-2xl font-bold tracking-tight text-gray-900">Upcoming Events</h2>
-
+    <%= form_tag events_path, method: :get do %>
+      <div class="flex justify-between items-center">
+        <%= text_field_tag :search, params[:search], class: "rounded-md border border-gray-400 outline-none px-3 py-2 w-full", placeholder: "Search events..." %>
+        <%= button_tag type: 'submit', class: "bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded inline-flex items-center" do %>
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1" stroke="currentColor" class="w-5 h-5 mr-2">
+            <path stroke-linecap="round" stroke-linejoin="round" d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z" />
+          </svg>
+        <% end %>
+      </div>
+    <% end %>
+  </div>
   <div class="mt-6 grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-4 xl:gap-x-8">
     <% @events.each do |event| %>
       <%= render "event", event: event %>
