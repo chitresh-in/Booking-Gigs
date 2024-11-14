@@ -1,4 +1,5 @@
 class Event < ApplicationRecord
+  has_paper_trail
   enum :status, { draft: 0, published: 1, cancelled: 2}
 
   belongs_to :category
