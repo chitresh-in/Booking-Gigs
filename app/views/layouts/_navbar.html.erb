@@ -8,12 +8,14 @@
     <% end %>
     <div class="flex space-x-4">
         <%= link_to "All Gigs", events_path, class: "rounded-md px-3 py-2 text-sm font-medium text-gray-300 hover:bg-gray-700 hover:text-white" %>
-        <%= link_to "My Gigs", events_path(host_id: current_user.id), class: "rounded-md px-3 py-2 text-sm font-medium text-gray-300 hover:bg-gray-700 hover:text-white" %>
+        <% if user_signed_in? %>
+          <%= link_to "My Gigs", events_host_path(id: current_user.id), class: "rounded-md px-3 py-2 text-sm font-medium text-gray-300 hover:bg-gray-700 hover:text-white" %>
+        <% end %>
         <%= link_to "My Bookings", bookings_path, class: "rounded-md px-3 py-2 text-sm font-medium text-gray-300 hover:bg-gray-700 hover:text-white" %>
     </div>
     <div class="flex space-x-4">
       <% if user_signed_in? %>
-        <%= link_to "Log out", destroy_user_session_path, method: :delete, class: "rounded-md px-3 py-2 text-sm font-medium text-gray-300 hover:bg-gray-700 hover:text-white" %>
+        <%= button_to "Log out", destroy_user_session_path, method: :delete, class: "rounded-md px-3 py-2 text-sm font-medium text-gray-300 hover:bg-gray-700 hover:text-white" %>
       <% else %>
         <%= link_to "Log in", new_user_session_path, class: "rounded-md px-3 py-2 text-sm font-medium text-gray-300 hover:bg-gray-700 hover:text-white" %>
       <% end %>
