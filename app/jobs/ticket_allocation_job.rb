@@ -16,7 +16,8 @@ class TicketAllocationJob
         .limit(booking.tickets_count)
 
       if available_tickets.count < booking.tickets_count
-        raise ActiveRecord::Rollback
+        booking.update(status: :failed)
+        return
       end
 
       available_tickets.update_all(booking_id: booking.id)
