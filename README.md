@@ -53,3 +53,43 @@
 
 ### 6. Create a new gig.
 <img width="1000" alt="6  Create new event" src="https://github.com/user-attachments/assets/1073275f-a470-4ca7-9fba-074f2eb753e4">
+
+
+## Test Plan
+
+### 1. User tries to book an event with unlimited tickets.
+- Create an event with unlimited tickets(tickets_count = nil).
+- Create a user.
+- User tries to book 5 tickets.
+
+#### a. Maximum allowed tickets per user is not exceeded:
+- Expected result: Booking should be successful and move to confirmed status.
+
+#### b. Maximum allowed tickets per user is exceeded:
+- Expected result: Booking should fail with "Maximum allowed tickets per user exceeded" error.
+
+#### c. User has previous confirmed booking for the event:
+- If total tickets booked by user is less than or equal to maximum allowed tickets per user.
+- Expected result: Booking should be successful and move to confirmed status.
+
+- If total tickets booked by user is greater than maximum allowed tickets per user.
+- Expected result: Booking should fail with "Maximum allowed tickets per user exceeded" error.
+
+#### d. User has previous pending booking for the event:
+- Expected result: Booking should fail with "You already have a pending booking for this event" error.
+
+### 2. User tries to book more tickets than available.
+- Create an event with 100 tickets.
+- Create a user.
+- Create bookings for 100 tickets.
+- User tries to book 5 tickets.
+
+- Expected result: Booking should fail with "Tickets sold out" error.
+
+### 3. Multiple users attempt to book the same event with limited tickets.
+- Create an event with 100 tickets.
+- Create 30 users.
+- Use threads to have each user attempt to book 5 tickets concurrently.
+
+- Expected result: Only 20 users should get booking with confirmed status and 5 tickets each. The rest should get a "Tickets sold out" error.
+- In case some of the other 10 users are able to make booking, it should move to the failed status.
