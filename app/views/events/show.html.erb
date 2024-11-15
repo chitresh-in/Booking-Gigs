@@ -1,7 +1,9 @@
 <div class="mt-8 md:w-2/3 w-full flex">
   <div class="mx-auto">
-    <%= render @event %>
-    <div class="mt-8"><%= @event.rich_description %></div>
+    <% cache [@event, @event.booking_status] do %>
+      <%= render @event %>
+      <div class="mt-8"><%= @event.rich_description %></div>
+    <% end %>
 
     <% if @event.booking_open? %>
       <p class="mt-4 text-sm text-orange-400">

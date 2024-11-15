@@ -7,8 +7,8 @@ class Event < ApplicationRecord
   enum :status, { draft: 0, published: 1, cancelled: 2}
   # TODO: Add AASM to handle status transitions and guards
 
-  belongs_to :category
-  belongs_to :venue
+  belongs_to :category, touch: true
+  belongs_to :venue, touch: true
   belongs_to :host, class_name: "User"
 
   has_one_attached :poster_image
@@ -49,6 +49,16 @@ class Event < ApplicationRecord
 
   def booking_ended?
     Time.current > booking_end_time
+  end
+
+  def booking_status
+    if booking_open?
+      "open"
+    elsif booking_ended?
+      "closed"
+    else
+      "upcoming"
+    end
   end
   
   private
