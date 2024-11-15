@@ -7,7 +7,9 @@ module Tickets
   
     def book(tickets_count)
       tickets_count = tickets_count.to_i
-      return { success: false, error: 'Tickets sold out' } if @event.tickets.available_for_booking.count < tickets_count
+      if tickets_count > @event.tickets.available_for_booking.count - Ticket.pending_for_allocation(@event)
+        return { success: false, error: 'Tickets sold out' }
+      end
 
       booking = Booking.new(
         event: @event,

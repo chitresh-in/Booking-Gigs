@@ -1,5 +1,6 @@
 class TicketAllocationJob
   include Sidekiq::Job
+  sidekiq_options queue: "ticket_allocation"
 
   def perform(booking_id)
     booking = Booking.find_by(id: booking_id)
