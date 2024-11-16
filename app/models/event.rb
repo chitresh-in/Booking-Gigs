@@ -28,7 +28,7 @@ class Event < ApplicationRecord
   validate :event_end_time_must_be_after_event_start_time
   # TODO: Add validation to ensure no changes are made to published events
 
-  after_create :create_tickets, if: -> { saved_change_to_status?(from: "draft", to: "published") }
+  after_create_commit :create_tickets, :initialize_tickets_on_hold_counter
 
   scope :order_by_booking_status, -> { 
     order(Arel.sql("CASE 
@@ -60,7 +60,11 @@ class Event < ApplicationRecord
       "upcoming"
     end
   end
-  
+
+  def tickets_on_hold_count_cache_key
+    "event:#{id}_tickets_on_hold_count"
+  end
+
   private
   
   def booking_start_time_must_be_future
@@ -89,5 +93,9 @@ class Event < ApplicationRecord
 
   def create_tickets
     Ticket.create!([{event_id: id}] * total_tickets) unless has_unlimited_tickets?
+  end
+
+  def initialize_tickets_on_hold_counter
+    Rails.cache.write(tickets_on_hold_count_cache_key, 0, raw: true)
   end
 end
