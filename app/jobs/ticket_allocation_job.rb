@@ -17,11 +17,11 @@ class TicketAllocationJob
 
       if available_tickets.count < booking.tickets_count
         booking.update(status: :failed)
-        return
+      else
+        available_tickets.update_all(booking_id: booking.id)
+        booking.update(status: :confirmed, confirmed_at: Time.current)
       end
-
-      available_tickets.update_all(booking_id: booking.id)
-      booking.update(status: :confirmed, confirmed_at: Time.current)
+      Rails.cache.decrement(event.tickets_on_hold_count_cache_key, booking.tickets_count)
     end
   end
 end
