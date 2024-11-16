@@ -1,0 +1,4 @@
+:queues:
+  - ticket_allocation
+  - default 
+  
