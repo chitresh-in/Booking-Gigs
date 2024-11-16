@@ -7,7 +7,7 @@ module Tickets
   
     def book(tickets_count)
       tickets_count = tickets_count.to_i
-      if tickets_count > @event.tickets.available_for_booking.count - Ticket.pending_for_allocation(@event)
+      if tickets_count > @event.tickets.available_for_booking.count - Ticket.in_queue_for_allocation_count(@event)
         return { success: false, error: 'Tickets sold out' }
       end
 
@@ -30,6 +30,7 @@ module Tickets
       end
 
       if booking.save
+        Rails.cache.increment(@event.tickets_on_hold_count_cache_key, booking.tickets_count)
         TicketAllocationJob.perform_async(booking.id)
         return { success: true, booking_id: booking.id }
       else
