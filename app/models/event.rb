@@ -28,7 +28,8 @@ class Event < ApplicationRecord
   validate :event_end_time_must_be_after_event_start_time
   # TODO: Add validation to ensure no changes are made to published events
 
-  after_create_commit :create_tickets, :initialize_tickets_on_hold_counter
+  after_create :create_tickets
+  after_create_commit :initialize_tickets_on_hold_counter
 
   scope :order_by_booking_status, -> { 
     order(Arel.sql("CASE 
