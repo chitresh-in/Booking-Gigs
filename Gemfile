@@ -42,7 +42,7 @@ gem 'paper_trail', '~> 16.0'
 gem 'paranoia', '~> 3.0'
 gem "sidekiq", "~> 7.3"
 gem "searchkick"
-gem  "elasticsearch", "< 7.14"
+gem  "elasticsearch", "< 8.17"
 gem "local_time"
 
 group :development, :test do
