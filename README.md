@@ -54,6 +54,17 @@
 ### 6. Create a new gig.
 <img width="1000" alt="6  Create new event" src="https://github.com/user-attachments/assets/1073275f-a470-4ca7-9fba-074f2eb753e4">
 
+## Scope of improvements
+1. Implement rate limiting for booking tickets endpoint.
+2. Add choke point for booking tickets so that at a given time only a certain number of users can attempt to book tickets.
+3. Add reCAPTCHA before user can proceed with booking, using [`recaptcha`](https://github.com/ambethia/recaptcha) gem.
+4. Leverage CDN to cache static assets and non frequently changing pages like event details page to reduce load on server.
+5. Add [`aasm`](https://github.com/aasm/aasm) gem to handle event and booking status transitions and guards.
+6. Add validations to ensure no changes are made to published events.
+7. Show number of people attending the event on the event details page.
+8. Show number of users currently viewing the event on the event details page.
+9. Implement server-sent events to update booking status in realtime.
+
 
 ## Test Plan
 
