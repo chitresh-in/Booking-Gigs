@@ -67,7 +67,10 @@ class Event < ApplicationRecord
   end
 
   private
-  
+  def tickets_sold_out?
+    !has_unlimited_tickets? && tickets.available_for_booking.count.zero?
+  end
+
   def booking_start_time_must_be_future
     if booking_start_time.present? && booking_start_time < Time.current
       errors.add(:booking_start_time, "must be in the future")
