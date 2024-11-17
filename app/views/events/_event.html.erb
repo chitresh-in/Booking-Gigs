@@ -25,12 +25,15 @@
     </div>
 
     <div class="mt-1">
-      <% if event.booking_ended? %>
-        <p class="text-sm text-gray-500 text-red-500">Bookings Closed</p>
-      <% elsif event.booking_open? %>
+      <% case event.booking_status %>
+      <% when :upcoming %>
+        <p class="text-sm text-gray-500">Bookings open: <%= event.booking_start_time.strftime("%b %d - %H:%M %Z") %></p>
+      <% when :sold_out %>
+        <p class="text-sm text-gray-500 text-red-500">Sold Out</p>
+      <% when :open %>
         <p class="text-sm text-gray-500 text-green-500">Bookings Open</p>
       <% else %>
-        <p class="text-sm text-gray-500">Bookings open: <%= event.booking_start_time.strftime("%b %d - %H:%M %Z") %></p>
+        <p class="text-sm text-gray-500 text-red-500">Bookings Closed</p>
       <% end %>
     </div>
   </div>

@@ -5,7 +5,7 @@
       <div class="mt-8"><%= @event.rich_description %></div>
     <% end %>
 
-    <% if @event.booking_open? %>
+    <% if @event.booking_status == :open %>
       <p class="mt-4 text-sm text-orange-400">
         Booking closes on <%= @event.booking_end_time.strftime("%b %d - %H:%M %Z") %>
       </p>
