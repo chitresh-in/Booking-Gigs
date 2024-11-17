@@ -44,22 +44,12 @@ class Event < ApplicationRecord
     total_tickets.nil?
   end
 
-  def booking_open?
-    Time.current >= booking_start_time && Time.current <= booking_end_time
-  end
-
-  def booking_ended?
-    Time.current > booking_end_time
-  end
-
   def booking_status
-    if booking_open?
-      "open"
-    elsif booking_ended?
-      "closed"
-    else
-      "upcoming"
-    end
+    return :upcoming if booking_not_started?
+    return :sold_out if booking_open? && tickets_sold_out?
+    return :open if booking_open?
+
+    :closed
   end
 
   def tickets_on_hold_count_cache_key
@@ -67,6 +57,15 @@ class Event < ApplicationRecord
   end
 
   private
+
+  def booking_open?
+    Time.current >= booking_start_time && Time.current <= booking_end_time
+  end
+
+  def booking_not_started?
+    Time.current < booking_start_time
+  end
+
   def tickets_sold_out?
     !has_unlimited_tickets? && tickets.available_for_booking.count.zero?
   end
