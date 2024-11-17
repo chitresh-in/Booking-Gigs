@@ -20,6 +20,7 @@
 - [`paranoia`](https://github.com/rubysherpas/paranoia) - Soft deletes
 - [`searchkick`](https://github.com/ankane/searchkick) - Search functionality
 - [`elasticsearch`](https://github.com/elastic/elasticsearch-ruby) - Search functionality
+- [`local_time`](https://github.com/basecamp/local_time) - Client timezone support
 - [`active_storage_validations`](https://github.com/igorkasyanchuk/active_storage_validations) - Validations for Active Storage
 - [`faker`](https://github.com/faker-ruby/faker) - Fake data generator
 - [`rails-erd`](https://github.com/voormedia/rails-erd) - Generate Entity-Relationship Diagrams

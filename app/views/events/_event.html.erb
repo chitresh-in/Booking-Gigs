@@ -13,7 +13,7 @@
       <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1" stroke="grey" style="width: 16px;">
         <path stroke-linecap="round" stroke-linejoin="round" d="M6.75 3v2.25M17.25 3v2.25M3 18.75V7.5a2.25 2.25 0 0 1 2.25-2.25h13.5A2.25 2.25 0 0 1 21 7.5v11.25m-18 0A2.25 2.25 0 0 0 5.25 21h13.5A2.25 2.25 0 0 0 21 18.75m-18 0v-7.5A2.25 2.25 0 0 1 5.25 9h13.5A2.25 2.25 0 0 1 21 11.25v7.5" />
       </svg>
-      <p class="text-sm text-gray-500 ml-2"><%= event.start_time.strftime("%a, %b %d - %H:%M %Z") %></p>  
+      <p class="text-sm text-gray-500 ml-2"><%= local_time(event.start_time, '%a, %b %d - %H:%M %Z') %></p>  
     </div>
 
     <div class="flex flex-row mt-1">
@@ -27,7 +27,7 @@
     <div class="mt-1">
       <% case event.booking_status %>
       <% when :upcoming %>
-        <p class="text-sm text-gray-500">Bookings open: <%= event.booking_start_time.strftime("%b %d - %H:%M %Z") %></p>
+        <p class="text-sm text-gray-500">Bookings open: <%= local_time(event.booking_start_time, '%b %d - %H:%M %Z') %></p>
       <% when :sold_out %>
         <p class="text-sm text-gray-500 text-red-500">Sold Out</p>
       <% when :open %>

@@ -7,7 +7,7 @@
 
     <% if @event.booking_status == :open %>
       <p class="mt-4 text-sm text-orange-400">
-        Booking closes on <%= @event.booking_end_time.strftime("%b %d - %H:%M %Z") %>
+        Booking closes on <%= local_time(@event.booking_end_time, '%b %d - %H:%M %Z') %>
       </p>
       <p class="mt-2 text-sm text-orange-400">
         Max. tickets per user: <%= pluralize(@event.max_tickets_per_user, "ticket") %>

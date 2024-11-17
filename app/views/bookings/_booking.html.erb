@@ -3,7 +3,7 @@
         <%= image_tag booking.event.poster_image, class: "size-12 flex-none rounded-full bg-gray-50" %>
         <div class="min-w-0 flex-auto">
         <%= link_to booking.event.title, booking_path(booking), class: "text-sm/6 font-semibold text-gray-900" %>
-        <p class="mt-1 truncate text-xs/5 text-gray-500"><%= booking.event.start_time.strftime("%d %b %Y, %I:%M %p") %></p>
+        <p class="mt-1 truncate text-xs/5 text-gray-500"><%= local_time(booking.event.start_time, '%a, %b %d - %H:%M %Z') %></p>
         </div>
     </div>
     <div class="hidden shrink-0 sm:flex sm:flex-col sm:items-end">
