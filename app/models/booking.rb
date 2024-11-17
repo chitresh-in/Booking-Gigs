@@ -35,17 +35,16 @@ class Booking < ApplicationRecord
   def ensure_no_other_pending_bookings
     return unless pending?
 
-    existing_pending_bookings = user.bookings.where(event: event, status: :pending).where.not(id: id)
+    existing_pending_bookings = user.bookings.where(event: event, status: :pending)
     errors.add(:base, "You already have a pending booking for this event") if existing_pending_bookings.exists?
   end
 
   def ensure_user_ticket_limit
     return unless event&.max_tickets_per_user
     
-    total_user_tickets = user.bookings
-      .where(event: event)
-      .where.not(id: id)
-      .sum(:tickets_count)
+    total_user_tickets = user.bookings.confirmed
+                             .where(event: event)
+                             .sum(:tickets_count)
       
     if total_user_tickets + tickets_count > event.max_tickets_per_user
       errors.add(:tickets_count, "exceeds the limit of #{event.max_tickets_per_user} tickets per user")
