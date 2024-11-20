@@ -58,6 +58,8 @@
 7. Show number of people attending the event on the event details page.
 8. Show number of users currently viewing the event on the event details page.
 9. Implement server-sent events to update booking status in realtime.
+10. Allow user to retry the same booking if it fails.
+11. Admin panel to manage events, bookings, users, categories, venues.
 
 
 ## Test Plan
