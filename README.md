@@ -34,7 +34,10 @@
 
 
 ## Database Schema
-<img width="1000" alt="Screenshot 2024-11-15 at 12 01 49 PM" src="https://github.com/user-attachments/assets/04fe2e54-6395-46c9-93e7-5f67b2ef195f">
+<img width="1000" alt="BookingGigs DB Schema" src="https://github.com/user-attachments/assets/04fe2e54-6395-46c9-93e7-5f67b2ef195f">
+
+## High Level Infra Design
+<img width="1000" alt="BookingGigs High Level Infra Design" src="https://github.com/user-attachments/assets/702f977b-330a-4c4d-9a16-d7c7be31f265">
 
 
 ## User Actions
