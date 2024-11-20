@@ -95,6 +95,7 @@ class Event < ApplicationRecord
   end
 
   def create_tickets
+    # TODO: Move to a background job
     Ticket.create!([{event_id: id}] * total_tickets) unless has_unlimited_tickets?
   end
 
