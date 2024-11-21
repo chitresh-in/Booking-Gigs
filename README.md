@@ -63,6 +63,9 @@
 9. Implement server-sent events to update booking status in realtime.
 10. Allow user to retry the same booking if it fails.
 11. Admin panel to manage events, bookings, users, categories, venues.
+12. Venue should be a seperate table.
+13. User should be able to add new venues from the event creation form.
+14. Filters based on category, venue, date.
 
 
 ## Test Plan
