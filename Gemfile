@@ -37,7 +37,7 @@ gem "bootsnap", require: false
 gem "image_processing", "~> 1.2"
 
 gem "devise", "~> 4.9"
-gem 'active_storage_validations', '~> 1.2'
+gem 'active_storage_validations', '~> 1.4'
 gem 'paper_trail', '~> 16.0'
 gem 'paranoia', '~> 3.0'
 gem "sidekiq", "~> 7.3"
